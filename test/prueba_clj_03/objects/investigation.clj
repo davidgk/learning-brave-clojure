@@ -27,6 +27,43 @@
       (println (format "walked %s step" init))
       (do_walk (inc init) step))))
 
+(defprotocol PersonActions
+  "Some actions that a person can make"
+  (can-say-my-name-and-greeting [this greeting]
+    "Can return a string with the name and some message")
+  )
+
+(defprotocol DeveloperActions
+  "Some actions that a person can make"
+  (rant-and-greetings [this greeting]
+    "Can rant and say hello")
+  )
+
+(defprotocol GetterActions
+  "Some actions that a person can make"
+  (get-name [this]
+    "Can retrieve the name")
+  )
+(defrecord Persona [_name]
+  PersonActions
+  (can-say-my-name-and-greeting [_ greetings]
+    (format "Hey there, I'm %s and %s" _name greetings))
+  DeveloperActions
+  (rant-and-greetings [_ greetings]
+    (format "Fucking Clojure, I'm %s and %s" _name greetings))
+  GetterActions
+  (get-name [_]
+    (str "My name is " _name))
+  )
+
+(defn create-a-persona [name]
+  (Persona. name))
+(deftest Persona2-test
+  (let [charly (create-a-persona "carlos") ]
+    (is (= (get-name charly ) "My name is carlos"))
+    (is (= (can-say-my-name-and-greeting charly "ta'que los pario") "Hey there, I'm carlos and ta'que los pario"))
+    (is (= (rant-and-greetings charly "ta'que los pario") "Fucking Clojure, I'm carlos and ta'que los pario")) ))
+
 (def person {:constructor (fn ([name age dni]
                                (-> person
                                    (updater :name name)
@@ -55,3 +92,5 @@
     (is (= (exec charly :walk 10) "walked 10 steps"))
     (is (= (getter charly :dni) "21912691"))
     ))
+
+; Clojure Spec Def record y protocols

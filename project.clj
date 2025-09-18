@@ -7,8 +7,11 @@
                  [org.clojure/core.async "1.6.681"]
                  [org.clojure/clojure "1.11.1"]
                  [prismatic/schema "1.4.1"]
+                 [org.clojure/tools.logging "1.3.0"]
+                 [log4j/log4j "1.2.17"]
                  ]
   :main ^:skip-aot prueba-clj-03.core
   :target-path "target/%s"
+  :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/log4j"]
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
