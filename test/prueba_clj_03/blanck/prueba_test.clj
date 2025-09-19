@@ -1,4 +1,4 @@
-(ns prueba-clj-03.blanck.test.prueba-test
+(ns prueba-clj-03.blanck.prueba-test
   (:require [clojure.test :refer :all]
             [prueba-clj-03.blanck.src.prueba :as sut]
             ))
