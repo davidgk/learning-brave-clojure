@@ -68,6 +68,20 @@
             (is (= expected result) (format should result))))))))
 
 
+(defn triangularTDD [n]
+  " el zero es opcional ..
+    y si agregas el 1 a range es un loop menos. y no es recursivo."
+  (let [ value (reduce (fn [origin val] (+ origin val)) 0 (range n))]
+    value)
+)
+
+
+(deftest basic-tests
+  (is (= (triangularTDD 2) 3))
+  (is (= (triangularTDD 3) 6))
+  (is (= (triangularTDD 4) 10))
+  (is (= (triangularTDD 10000) 50005000))
+  )
 
 (deftest basic-tests
   (is (= (triangular 2) 3))
